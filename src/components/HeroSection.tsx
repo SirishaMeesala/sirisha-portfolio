@@ -365,11 +365,11 @@ export const HeroSection: React.FC = () => {
 
                 {/* AVATAR IMAGE - FIXED PATH */}
                 <img
-                  src="/avatar.jpg"
-                  alt="Meesala Satya Sirisha Digital Artifact"
-                  className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 select-none pointer-events-none"
-                  referrerPolicy="no-referrer"
-                />
+  src="https://raw.githubusercontent.com/SirishaMeesala/sirisha-portfolio/main/avatar.jpg"
+  alt="Meesala Satya Sirisha Digital Artifact"
+  className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 select-none pointer-events-none"
+  referrerPolicy="no-referrer"
+/>
 
                 {/* Depth scrims */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#040407]/90 via-transparent to-transparent opacity-75" />
