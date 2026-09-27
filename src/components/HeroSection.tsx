@@ -29,24 +29,60 @@ export const HeroSection: React.FC = () => {
   });
 
   // Cinematic scroll transforms
-  const heroDarkenOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [0, 0.8, 0.95]);
-  const heroContentY = useTransform(scrollYProgress, [0, 1], [0, -110]);
-  const heroContentOpacity = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.45, 0]);
-  const heroContentScale = useTransform(scrollYProgress, [0, 1], [1, 0.96]);
+  const heroDarkenOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.75, 1],
+    [0, 0.8, 0.95]
+  );
 
-  const artifactScale = useTransform(scrollYProgress, [0, 1], [1, 0.76]);
-  const artifactScrollY = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const artifactOpacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 0.4, 0]);
+  const heroContentY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, -110]
+  );
+
+  const heroContentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.75, 1],
+    [1, 0.45, 0]
+  );
+
+  const heroContentScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, 0.96]
+  );
+
+  const artifactScale = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [1, 0.76]
+  );
+
+  const artifactScrollY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, 60]
+  );
+
+  const artifactOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.8, 1],
+    [1, 0.4, 0]
+  );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
+
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+
     const normX = (x / rect.width - 0.5) * 2;
     const normY = (y / rect.height - 0.5) * 2;
 
     setMousePos({ x, y, normX, normY });
+
     smoothLightX.set(e.clientX);
     smoothLightY.set(e.clientY);
 
@@ -113,22 +149,23 @@ export const HeroSection: React.FC = () => {
       onMouseLeave={handleMouseLeave}
       className="relative min-h-screen flex flex-col justify-between pt-32 pb-16 px-6 max-w-7xl mx-auto overflow-hidden"
     >
-      {/* Dynamic Cursor Light Spotlight (Smooth & Subtle) */}
+      {/* Dynamic Cursor Light Spotlight */}
       <motion.div
         className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-700"
         style={{
           opacity: isInside ? 0.6 : 0.25,
-          background: `radial-gradient(650px circle at 50% 40%, rgba(139, 92, 246, 0.12), rgba(56, 189, 248, 0.04), transparent 70%)`,
+          background:
+            'radial-gradient(650px circle at 50% 40%, rgba(139, 92, 246, 0.12), rgba(56, 189, 248, 0.04), transparent 70%)',
         }}
       />
 
-      {/* Cinematic Darkening Veil on Scroll - confined to Hero */}
+      {/* Cinematic Darkening Veil on Scroll */}
       <motion.div
         style={{ opacity: heroDarkenOpacity }}
         className="pointer-events-none absolute inset-0 bg-[#040407] z-10"
       />
 
-      {/* Main hero content with scroll transforms */}
+      {/* Main hero content */}
       <motion.div
         style={{
           y: heroContentY,
@@ -137,7 +174,7 @@ export const HeroSection: React.FC = () => {
         }}
         className="my-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-20"
       >
-        {/* Left Column: Foreground Typography with Subtle Parallax */}
+        {/* Left Column */}
         <motion.div
           style={{
             x: textParallaxX,
@@ -145,7 +182,7 @@ export const HeroSection: React.FC = () => {
           }}
           className="lg:col-span-8 space-y-6"
         >
-          {/* Status Kicker - Content Corrected according to user requirement */}
+          {/* Status Kicker */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -153,12 +190,15 @@ export const HeroSection: React.FC = () => {
             className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-slate-400 font-mono"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+
             <span>FINAL-YEAR B.TECH IT</span>
+
             <span className="text-slate-600">·</span>
+
             <span>SOFTWARE & AI PROJECTS</span>
           </motion.div>
 
-          {/* Main Title Lockup with Staggered Letter Entrance */}
+          {/* Main Title */}
           <div className="space-y-2">
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -175,7 +215,7 @@ export const HeroSection: React.FC = () => {
               animate="visible"
               className="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight text-white font-display uppercase leading-[0.95] text-gradient-violet-blue flex flex-wrap gap-x-5 select-none"
             >
-              {/* Word 1: SATYA */}
+              {/* SATYA */}
               <span className="inline-flex whitespace-nowrap">
                 {firstName.split('').map((letter, i) => (
                   <motion.span
@@ -188,7 +228,7 @@ export const HeroSection: React.FC = () => {
                 ))}
               </span>
 
-              {/* Word 2: SIRISHA */}
+              {/* SIRISHA */}
               <span className="inline-flex whitespace-nowrap">
                 {lastName.split('').map((letter, i) => (
                   <motion.span
@@ -210,12 +250,18 @@ export const HeroSection: React.FC = () => {
             transition={{ duration: 0.7, delay: 0.55 }}
             className="flex flex-wrap items-center gap-4 text-sm sm:text-base text-slate-300 font-mono"
           >
-            <span className="text-white font-semibold">{PERSONAL_INFO.title}</span>
+            <span className="text-white font-semibold">
+              {PERSONAL_INFO.title}
+            </span>
+
             <span className="text-violet-400">/</span>
-            <span className="text-sky-300">{PERSONAL_INFO.batch}</span>
+
+            <span className="text-sky-300">
+              {PERSONAL_INFO.batch}
+            </span>
           </motion.div>
 
-          {/* Career Objective Text */}
+          {/* Career Objective */}
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -225,7 +271,7 @@ export const HeroSection: React.FC = () => {
             {PERSONAL_INFO.careerObjective}
           </motion.p>
 
-          {/* Magnetic Action Buttons */}
+          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -250,7 +296,7 @@ export const HeroSection: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Column: 3D Futuristic Digital Artifact Visual */}
+        {/* Right Column */}
         <div className="lg:col-span-4 flex justify-center lg:justify-end">
           <motion.div
             style={{
@@ -260,7 +306,7 @@ export const HeroSection: React.FC = () => {
             }}
             className="relative"
           >
-            {/* Subtle orbital particle ring */}
+            {/* Orbital particle ring */}
             <div className="absolute -inset-10 pointer-events-none">
               {[0, 45, 90, 135, 180, 225, 270, 315].map((deg, i) => (
                 <motion.div
@@ -289,7 +335,7 @@ export const HeroSection: React.FC = () => {
               ))}
             </div>
 
-            {/* The 3D Digital Artifact Frame */}
+            {/* 3D Digital Artifact Frame */}
             <motion.div
               initial={{ opacity: 0, scale: 0.88 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -301,7 +347,7 @@ export const HeroSection: React.FC = () => {
               }}
               className="relative w-64 h-64 sm:w-76 sm:h-76 rounded-2xl p-2.5 glass-panel border border-violet-500/40 shadow-[0_0_50px_rgba(139,92,246,0.22)] group overflow-hidden"
             >
-              {/* Continuous Idle Ambient Shimmer */}
+              {/* Ambient Shimmer */}
               <motion.div
                 animate={{
                   opacity: [0.3, 0.65, 0.3],
@@ -314,10 +360,12 @@ export const HeroSection: React.FC = () => {
                 className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-violet-600/25 via-sky-500/15 to-transparent pointer-events-none"
               />
 
-              {/* Glass Beveled Inner Boundary */}
+              {/* Inner Boundary */}
               <div className="w-full h-full rounded-xl overflow-hidden relative border border-white/10 bg-[#080914]">
+
+                {/* AVATAR IMAGE - FIXED PATH */}
                 <img
-                  src="/src/assets/images/digital_avatar_1790498007081.jpg"
+                  src="/avatar.jpg"
                   alt="Meesala Satya Sirisha Digital Artifact"
                   className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 select-none pointer-events-none"
                   referrerPolicy="no-referrer"
@@ -326,18 +374,25 @@ export const HeroSection: React.FC = () => {
                 {/* Depth scrims */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#040407]/90 via-transparent to-transparent opacity-75" />
 
-                {/* Micro Tech HUD on Artifact */}
+                {/* Micro Tech HUD */}
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[11px] font-mono text-slate-300 backdrop-blur-md bg-black/75 px-3 py-1.5 rounded-lg border border-white/15 shadow-sm">
                   <span className="flex items-center gap-1.5 text-sky-300">
-                    <Sparkles className="w-3 h-3 text-sky-400" /> MSS // ARTIFACT
+                    <Sparkles className="w-3 h-3 text-sky-400" />
+                    MSS // ARTIFACT
                   </span>
-                  <span className="text-slate-400">ONLINE</span>
+
+                  <span className="text-slate-400">
+                    ONLINE
+                  </span>
                 </div>
 
-                {/* Subtle corner brackets */}
+                {/* Corner brackets */}
                 <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-sky-400/60" />
+
                 <div className="absolute top-2 right-2 w-2 h-2 border-t border-r border-violet-400/60" />
+
                 <div className="absolute bottom-2 left-2 w-2 h-2 border-b border-l border-violet-400/60" />
+
                 <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-sky-400/60" />
               </div>
             </motion.div>
@@ -345,7 +400,7 @@ export const HeroSection: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* Subtle Scroll Indicator */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -358,9 +413,14 @@ export const HeroSection: React.FC = () => {
           className="group flex flex-col items-center gap-2 text-xs font-mono tracking-[0.25em] text-slate-400 hover:text-white transition-colors"
         >
           <span>SCROLL TO EXPLORE ↓</span>
+
           <motion.div
             animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+            transition={{
+              repeat: Infinity,
+              duration: 1.8,
+              ease: 'easeInOut',
+            }}
             className="w-6 h-9 rounded-full border border-white/20 flex items-start justify-center p-1"
           >
             <div className="w-1 h-2 bg-violet-400 rounded-full shadow-[0_0_6px_rgba(139,92,246,0.8)]" />
